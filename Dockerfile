@@ -1,5 +1,5 @@
 # Verwende ein Node.js-Image als Basis
-FROM node:lts AS build
+FROM node:latest AS build
 
 # Erstelle das Arbeitsverzeichnis
 WORKDIR /app
@@ -16,7 +16,7 @@ COPY . .
 # Baue das Projekt
 RUN npm run build
 
-FROM node:lts
+FROM node:latest
 
 # Erstelle das Arbeitsverzeichnis
 WORKDIR /app

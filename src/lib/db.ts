@@ -173,7 +173,7 @@ class DB {
 
       config.tcp.services[`gui-tls-${route.name}-service`] = {
         loadBalancer: {
-          servers: [{ url: `tcp://${route.target}` }]
+          servers: [{ address: `${route.target}` }]
         }
       };
 
@@ -194,6 +194,10 @@ class DB {
       };
 
     });
+
+    if (config.http.routers.length == 0) {
+      delete config.http;
+    }
 
     fs.mkdirSync('traefik', { recursive: true });
     fs.writeFileSync('traefik/dynamic_config.yml', YAML.stringify(config, { indent: 2 }));
