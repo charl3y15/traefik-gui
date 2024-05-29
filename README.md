@@ -1,38 +1,35 @@
-# create-svelte
+# Traefik-GUI
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+This project is a Web-GUI for the [Traefik](https://traefik.io/traefik/) reverse proxy.
+It allows you to easily add routes to your **dynamic** Traefik configuration.
 
-## Creating a project
+It is meant for simple http and tcp routes, without having to manage the Traefik configuration manually.
 
-If you're seeing this, you've probably already done this step. Congrats!
+This is especially useful if you only have terminal access.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+It is currently in development and not ready for production use.
 
-# create a new project in my-app
-npm create svelte@latest my-app
+# Installation
+
+Traefik-GUI can be installed using docker:
+
+```shell
+docker pull ghcr.io/rahn-it/traefik-gui
+docker run -d -p 3000:3000 --name traefik-gui -v ./data:/app/data -v ./traefik-configs:/app/traefik ghcr.io/rahn-it/traefik-gui
 ```
 
-## Developing
+# Usage
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+You can access the GUI at port 3000. e.g.: `http://localhost:3000`
 
-```bash
-npm run dev
+The tool will automatically generate the Traefik configuration and put it in the `/app/truefik` folder inside the container.
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+In the above example, the `traefik-configs` folder is mapped to the respective Traefik configuration folder.
 
-## Building
+# Attribution
 
-To create a production version of your app:
+This project is licensed under the [AGPL-3.0](LICENSE).
 
-```bash
-npm run build
-```
+The development and hosting was kindly sponsored by [Rahn IT](https://it-rahn.de/).
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Thanks to the great people of [Traefik](https://traefik.io/), [SvelteKit](https://kit.svelte.dev/) and everyone who made this possible.
