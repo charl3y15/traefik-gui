@@ -10,7 +10,6 @@
   async function fetchRoutes() {
     const response = await fetch('/api/http_routes');
     const data = await response.json();
-    console.log(data.http_routes)
     http_routes.set(data.http_routes);
   }
 
@@ -29,8 +28,19 @@
       target = '';
       rule = '';
     } else {
-      // Handle error
       console.error('Failed to add route');
+    }
+  }
+
+  async function deleteRoute(id: number) {
+    const response = await fetch(`/api/http_routes/${id}`, {
+      method: 'DELETE'
+    });
+
+    if (response.ok) {
+      await fetchRoutes(); // Refresh the list after deleting a route
+    } else {
+      console.error('Failed to delete route');
     }
   }
 
@@ -56,9 +66,26 @@
     <button type="submit">Add Route</button>
   </form>
 
-  <ul>
-    {#each $http_routes as route}
-      <li>{route.name} - {route.target} - {route.rule}</li>
-    {/each}
-  </ul>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Target</th>
+        <th>Rule</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {#each $http_routes as route}
+        <tr>
+          <td>{route.name}</td>
+          <td>{route.target}</td>
+          <td>{route.rule}</td>
+          <td>
+            <button on:click={() => deleteRoute(route.id)}>Delete</button>
+          </td>
+        </tr>
+      {/each}
+    </tbody>
+  </table>
 </main>

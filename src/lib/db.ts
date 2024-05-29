@@ -9,7 +9,7 @@ export function getDB() {
     db.exec(`
       CREATE TABLE IF NOT EXISTS http_routes (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name VARCHAR(255),
+        name VARCHAR(255) unique,
         target VARCHAR(255),
         rule TEXT
       )
