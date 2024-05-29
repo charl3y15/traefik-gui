@@ -6,7 +6,8 @@ let db: Database.Database | null = null;
 
 export function getDB() {
   if (!db) {
-    db = new Database('database.sqlite');
+    fs.mkdirSync('data', { recursive: true });
+    db = new Database('data/database.sqlite');
 
     db.exec(`
       CREATE TABLE IF NOT EXISTS http_routes (
@@ -46,7 +47,8 @@ function generateTraefikConfig() {
     };
   });
 
-  fs.writeFileSync('dynamic_config.yml', YAML.stringify(config, { indent: 2 }));
+  fs.mkdirSync('traefik', { recursive: true });
+  fs.writeFileSync('traefik/dynamic_config.yml', YAML.stringify(config, { indent: 2 }));
 }
 
 generateTraefikConfig();
