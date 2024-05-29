@@ -1,0 +1,16 @@
+name: Build
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build and Push
+        run: |
+          docker login ghcr.io -u "${{ secrets.ghcr_user }}" -p "${{ secrets.ghcr_token }}"
+          docker build --pull -t "ghcr.io/rahn-it/website" --squash .
+          docker push "ghcr.io/rahn-it/traefik-gui"
