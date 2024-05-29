@@ -1,8 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { writable } from 'svelte/store';
+  import type { HttpRoute } from '$lib/types';
 
-  let http_routes = writable([]);
+  let http_routes = writable<HttpRoute[]>([]);
   let name = '';
   let target = '';
   let rule = '';
@@ -11,7 +12,7 @@
   async function fetchRoutes() {
     const response = await fetch('/api/http_routes');
     const data = await response.json();
-    http_routes.set(data.http_routes);
+    http_routes.set(data.httpRoutes as HttpRoute[]);
   }
 
   async function addRoute() {

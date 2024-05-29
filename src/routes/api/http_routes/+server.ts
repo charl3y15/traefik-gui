@@ -1,16 +1,16 @@
 import { json } from '@sveltejs/kit';
 import { getDB } from '$lib/db';
+import type { HttpRoute } from '$lib/types';
 
 export async function GET() {
   const db = getDB();
-  const http_routes = db.prepare('SELECT * FROM http_routes').all();
-  return json({ http_routes: http_routes });
+  const httpRoutes: HttpRoute[] = db.prepare('SELECT * FROM http_routes').all() as HttpRoute[];
+  return json({ httpRoutes });
 }
-
 
 export async function POST({ request }: { request: Request }) {
   const db = getDB();
-  const { name, target, rule } = await request.json();
+  const { name, target, rule }: Omit<HttpRoute, 'id'> = await request.json();
 
   try {
     const stmt = db.prepare('INSERT INTO http_routes (name, target, rule) VALUES (?, ?, ?)');
