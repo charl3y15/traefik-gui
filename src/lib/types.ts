@@ -3,4 +3,5 @@ export interface HttpRoute {
   name: string;
   target: string;
   rule: string;
+  mode: 'host' | 'rule'; 
 }

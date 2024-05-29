@@ -1,6 +1,8 @@
 import Database from 'better-sqlite3';
 import YAML from 'yaml';
 import fs from 'fs';
+import { rule } from 'postcss';
+import type { HttpRoute } from './types';
 
 let db: Database.Database | null = null;
 
@@ -17,6 +19,11 @@ export function getDB() {
         rule TEXT
       )
     `);
+
+    const columns = db.prepare(`PRAGMA table_info(http_routes)`).all();
+    if (!columns.some(column => column.name === 'mode')) {
+      db.exec(`ALTER TABLE http_routes ADD COLUMN mode VARCHAR(50) DEFAULT 'rule'`);
+    }
   }
 
   return db;
@@ -24,7 +31,7 @@ export function getDB() {
 
 export function generateTraefikConfig() {
   const db = getDB();
-  const routes = db.prepare('SELECT * FROM http_routes').all();
+  const routes: HttpRoute[] = db.prepare('SELECT * FROM http_routes').all() as HttpRoute[];
 
   const config = {
     http: {
@@ -34,13 +41,24 @@ export function generateTraefikConfig() {
   };
 
   routes.forEach(route => {
-    config.http.routers[route.name] = {
-      rule: route.rule,
-      service: `${route.name}-service`,
+    let rule = "";
+
+    switch (route.mode) {
+      case 'host':
+        rule = `Host(\`${route.rule}\`)`;
+        break;
+      case 'rule':
+        rule = route.rule;
+        break;
+    }
+
+    config.http.routers[`gui-${route.name}-service`] = {
+      rule: rule,
+      service: `gui-${route.name}-service`,
       entryPoints: ['web']
     };
 
-    config.http.services[`${route.name}-service`] = {
+    config.http.services[`gui-${route.name}-service`] = {
       loadBalancer: {
         servers: [{ url: `http://${route.target}` }]
       }

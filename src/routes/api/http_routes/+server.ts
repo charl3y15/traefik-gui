@@ -10,11 +10,11 @@ export async function GET() {
 
 export async function POST({ request }: { request: Request }) {
   const db = getDB();
-  const { name, target, rule }: Omit<HttpRoute, 'id'> = await request.json();
+  const { name, target, rule, mode }: Omit<HttpRoute, 'id'> = await request.json();
 
   try {
-    const stmt = db.prepare('INSERT INTO http_routes (name, target, rule) VALUES (?, ?, ?)');
-    const info = stmt.run(name, target, rule);
+    const stmt = db.prepare('INSERT INTO http_routes (name, target, mode, rule) VALUES (?, ?, ?, ?)');
+    const info = stmt.run(name, target, mode, rule);
 
     generateTraefikConfig();
 

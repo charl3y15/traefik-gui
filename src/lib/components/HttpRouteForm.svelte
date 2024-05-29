@@ -32,8 +32,23 @@
     />
   </div>
   <div class="form-control mb-2">
+    <label for="mode" class="label">
+      <span class="label-text">Mode:</span>
+    </label>
+    <select
+      id="mode"
+      bind:value={route.mode}
+      class="select select-bordered"
+      on:change={() => (route.rule = "")}
+    >
+      <option value="host">Host</option>
+      <option value="rule">Rule</option>
+    </select>
+  </div>
+  <div class="form-control mb-2">
     <label for="rule" class="label">
-      <span class="label-text">Rule:</span>
+      <span class="label-text">{route.mode === "host" ? "Host:" : "Rule:"}</span
+      >
     </label>
     <input
       id="rule"

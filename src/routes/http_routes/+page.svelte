@@ -10,6 +10,7 @@
     name: "",
     target: "",
     rule: "",
+    mode: "host",
   };
 
   let errorMessage = "";
@@ -40,6 +41,7 @@
         name: "",
         target: "",
         rule: "",
+        mode: "host",
       };
       errorMessage = "";
     } else {
@@ -57,6 +59,15 @@
       await fetchRoutes(); // Refresh the list after deleting a route
     } else {
       console.error("Failed to delete route");
+    }
+  }
+
+  function ruleDisplay(route: HttpRoute): string {
+    switch (route.mode) {
+      case "host":
+        return `Host: "${route.rule}"`;
+      case "rule":
+        return `Rule: "${route.rule}"`;
     }
   }
 
@@ -89,7 +100,7 @@
         <tr>
           <td>{route.name}</td>
           <td>{route.target}</td>
-          <td>{route.rule}</td>
+          <td>{ruleDisplay(route)}</td>
           <td>
             <button on:click={() => deleteRoute(route.id)} class="btn btn-error"
               >Delete</button
