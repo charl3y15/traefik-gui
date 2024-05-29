@@ -22,7 +22,7 @@ export function getDB() {
   return db;
 }
 
-function generateTraefikConfig() {
+export function generateTraefikConfig() {
   const db = getDB();
   const routes = db.prepare('SELECT * FROM http_routes').all();
 

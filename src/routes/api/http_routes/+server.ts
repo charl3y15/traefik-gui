@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import { getDB } from '$lib/db';
+import { getDB, generateTraefikConfig } from '$lib/db';
 import type { HttpRoute } from '$lib/types';
 
 export async function GET() {
@@ -15,6 +15,8 @@ export async function POST({ request }: { request: Request }) {
   try {
     const stmt = db.prepare('INSERT INTO http_routes (name, target, rule) VALUES (?, ?, ?)');
     const info = stmt.run(name, target, rule);
+
+    generateTraefikConfig();
 
     return json({ id: info.lastInsertRowid }, { status: 201 });
   } catch (error) {
