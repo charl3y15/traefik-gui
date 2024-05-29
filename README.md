@@ -11,6 +11,22 @@ It is currently in development and not ready for production use.
 
 ![example image](images/example.png)
 
+![example of tls forward](images/tls-example.png)
+
+# Features
+
+Currently, Traefik-gui has the following features:
+
+Forward HTTP-Request:
+- Via Hostname
+- Via raw traefik rule
+
+Forward TLS-Connections
+- Via HostSNI
+- Via HostSNI regex
+
+When adding a TLS-Route you, may also enable forwarding of the ACME-HTTP01 challenge to automatically create a router to the `/.well-known/acme-challenge/` endpoint used by let's encrypt.
+
 # Installation
 
 Traefik-GUI can be installed using docker:
@@ -20,13 +36,21 @@ docker pull ghcr.io/rahn-it/traefik-gui
 docker run -d -p 3000:3000 --name traefik-gui -v ./data:/app/data -v ./traefik-configs:/app/traefik ghcr.io/rahn-it/traefik-gui
 ```
 
+I would recommend using docker-compose though.
+
+As a starting point you can use the [docker compose file](docker-compose.yaml) frm this repository.
+Don't forget to enter your email. The example will spin up the traefik dashboard on port 8080
+
+
 # Usage
 
 You can access the GUI at port 3000. e.g.: `http://localhost:3000`
 
-The tool will automatically generate the Traefik configuration and put it in the `/app/truefik` folder inside the container.
+The tool will automatically generate the Traefik configuration and put it in the `/app/traefik` folder inside the container.
 
-In the above example, the `traefik-configs` folder is mapped to the respective Traefik configuration folder.
+When using the docker compose example, this folder will already be connected to the traefik container.
+
+If you have any questions or problems, feel free to create an issue.
 
 # Attribution
 

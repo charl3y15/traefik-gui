@@ -12,7 +12,7 @@ services:
       - 3000:3000
     volumes:
       - gui-data:/app/data
-      # - config:/app/traefik
+      - config:/app/traefik
 
   
   traefik:
@@ -38,5 +38,4 @@ services:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # Additional configurations created by the ui
-      # - config:/config:ro
-      - ./traefik:/config:ro
+      - config:/config:ro
