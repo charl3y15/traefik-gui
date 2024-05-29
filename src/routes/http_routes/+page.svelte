@@ -51,30 +51,36 @@
   onMount(fetchRoutes);
 </script>
 
-<main>
-  <h1>HTTP Routes</h1>
+<main class="container mx-auto p-4">
+  <h1 class="text-3xl font-bold mb-4">HTTP Routes</h1>
 
   {#if errorMessage}
-    <p style="color: red;">{errorMessage}</p>
+    <p class="text-red-500">{errorMessage}</p>
   {/if}
 
-  <form on:submit|preventDefault={addRoute}>
-    <div>
-      <label for="name">Name:</label>
-      <input id="name" type="text" bind:value={name} required>
+  <form on:submit|preventDefault={addRoute} class="mb-4">
+    <div class="form-control mb-2">
+      <label for="name" class="label">
+        <span class="label-text">Name:</span>
+      </label>
+      <input id="name" type="text" bind:value={name} class="input input-bordered" required>
     </div>
-    <div>
-      <label for="target">Target:</label>
-      <input id="target" type="text" bind:value={target} required>
+    <div class="form-control mb-2">
+      <label for="target" class="label">
+        <span class="label-text">Target:</span>
+      </label>
+      <input id="target" type="text" bind:value={target} class="input input-bordered" required>
     </div>
-    <div>
-      <label for="rule">Rule:</label>
-      <input id="rule" type="text" bind:value={rule} required>
+    <div class="form-control mb-2">
+      <label for="rule" class="label">
+        <span class="label-text">Rule:</span>
+      </label>
+      <input id="rule" type="text" bind:value={rule} class="input input-bordered" required>
     </div>
-    <button type="submit">Add Route</button>
+    <button type="submit" class="btn btn-primary">Add Route</button>
   </form>
 
-  <table>
+  <table class="table table-zebra w-full">
     <thead>
       <tr>
         <th>Name</th>
@@ -90,7 +96,7 @@
           <td>{route.target}</td>
           <td>{route.rule}</td>
           <td>
-            <button on:click={() => deleteRoute(route.id)}>Delete</button>
+            <button on:click={() => deleteRoute(route.id)} class="btn btn-error">Delete</button>
           </td>
         </tr>
       {/each}
