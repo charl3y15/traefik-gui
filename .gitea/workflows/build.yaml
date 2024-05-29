@@ -7,8 +7,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: docker
     steps:
-      - uses: actions/checkout@v3
+      - name: Add Git
+        run: apk update && apk add git
+      - name: Clone
+        run: git clone --depth 100 $(echo "${{ gitea.event.repository.clone_url }}" | sed -e "s^//^//:${{ gitea.token }}@^") .
       - name: Build and Push
         run: |
           docker login ghcr.io -u "${{ secrets.ghcr_user }}" -p "${{ secrets.ghcr_token }}"
