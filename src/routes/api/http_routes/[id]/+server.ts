@@ -1,13 +1,11 @@
 import { json } from '@sveltejs/kit';
-import { getDB, generateTraefikConfig } from '$lib/db';
+import { getDB } from '$lib/db';
 
 export async function DELETE({ params }: { params: { id: string } }) {
+  const id = parseInt(params.id);
   const db = getDB();
-  const stmt = db.prepare('DELETE FROM http_routes WHERE id = ?');
-  const info = stmt.run(params.id);
-
-  if (info.changes > 0) {
-    generateTraefikConfig();
+  let success = db.deleteHttpRoute(id);
+  if (success) {
     return json({ success: true }, { status: 200 });
   } else {
     return json({ error: 'Route not found' }, { status: 404 });

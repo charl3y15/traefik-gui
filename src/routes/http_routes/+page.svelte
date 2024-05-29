@@ -5,13 +5,7 @@
   import HttpRouteForm from "$lib/components/HttpRouteForm.svelte";
 
   let http_routes = writable<HttpRoute[]>([]);
-  let route: HttpRoute = {
-    id: 0,
-    name: "",
-    target: "",
-    rule: "",
-    mode: "host",
-  };
+  let route: HttpRoute = generateEmptyRoute();
 
   let errorMessage = "";
 
@@ -65,10 +59,20 @@
   function ruleDisplay(route: HttpRoute): string {
     switch (route.mode) {
       case "host":
-        return `Host: "${route.rule}"`;
+        return `Host: "${route.options.host}"`;
       case "rule":
-        return `Rule: "${route.rule}"`;
+        return `Rule: "${route.options.rule}"`;
     }
+  }
+
+  function generateEmptyRoute(): HttpRoute {
+    return {
+      id: 0,
+      name: "",
+      target: "",
+      mode: "host",
+      options: {},
+    };
   }
 
   onMount(fetchRoutes);
