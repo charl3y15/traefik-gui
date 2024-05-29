@@ -1,0 +1,9 @@
+
+services:
+  gui:
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - ./data:/app/data
+      - ./traefik:/app/traefik

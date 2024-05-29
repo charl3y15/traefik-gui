@@ -23,6 +23,10 @@ WORKDIR /app
 
 # Kopiere die erstellten Dateien aus dem vorherigen Build-Schritt
 COPY --from=build /app/build .
+COPY --from=build /app/package*.json ./
+
+# abhängigkeiten installieren
+RUN npm install
 
 # Erstelle ein Verzeichnis für die Traefik-Konfiguration und die Datenbank
 RUN mkdir -p /app/traefik /app/data
@@ -30,7 +34,7 @@ RUN mkdir -p /app/traefik /app/data
 VOLUME [ "/app/traefik", "/app/data" ]
 
 # Stelle sicher, dass der generateTraefikConfig-Befehl beim Starten ausgeführt wird
-CMD ["node", "generateTraefikConfig.js"]
+CMD ["node", "index.js"]
 
 # Exponiere den Port
 EXPOSE 3000
