@@ -1,21 +1,21 @@
 import { json } from '@sveltejs/kit';
 import { getDB } from '$lib/db';
-import type { HttpRoute } from '$lib/types';
+import type { HttpRoute, TlsRoute } from '$lib/types';
 import type { SqliteError } from 'better-sqlite3';
 
 export async function GET() {
   const db = getDB();
-  const http_routes: HttpRoute[] = db.listHttpRoutes();
-  return json({ http_routes });
+  const tls_routes: TlsRoute[] = db.listTlsRoutes();
+  return json({ tls_routes });
 }
 
 export async function POST({ request }: { request: Request }) {
   const db = getDB();
 
-  const route: Omit<HttpRoute, 'id'> = await request.json();
+  const route: Omit<TlsRoute, 'id'> = await request.json();
 
   try {
-    const id = db.newHttpRoute(route);
+    const id = db.newTlsRoute(route);
 
     return json({ id: id }, { status: 201 });
   } catch (error: SqliteError | any) {

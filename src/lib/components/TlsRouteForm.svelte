@@ -1,14 +1,21 @@
 <script lang="ts">
-  import type { HttpRoute, HttpRouteOptions, HttpRouteMode } from "$lib/types";
+  import type {
+    HttpRoute,
+    HttpRouteOptions,
+    HttpRouteMode,
+    TlsRoute,
+    TlsRouteMode,
+    TlsRouteOptions,
+  } from "$lib/types";
 
-  export let route: HttpRoute;
+  export let route: TlsRoute;
 
-  function generateOptions(mode: HttpRouteMode): HttpRouteOptions {
+  function generateOptions(mode: TlsRouteMode): TlsRouteOptions {
     switch (mode) {
       case "host":
         return { host: "" };
-      case "rule":
-        return { rule: "" };
+      case "host_regex":
+        return { host_regex: "" };
     }
   }
 </script>
@@ -51,7 +58,7 @@
       class="select select-bordered"
     >
       <option value="host">Host</option>
-      <option value="rule">Rule</option>
+      <option value="host_regex">Host-Regex</option>
     </select>
   </div>
   {#if route.mode === "host"}
@@ -68,17 +75,51 @@
         required
       />
     </div>
-  {:else if route.mode === "rule"}
+  {:else if route.mode === "host_regex"}
     <div class="form-control mb-2">
       <label for="rule" class="label">
-        <span class="label-text">Rule:</span>
+        <span class="label-text">Host-Regex:</span>
       </label>
       <input
         id="rule"
         type="text"
-        bind:value={route.options.rule}
+        bind:value={route.options.host_regex}
         class="input input-bordered"
         name="rule"
+        required
+      />
+    </div>
+  {/if}
+  <div class="form-control mb-2">
+    <label for="acme" class="label">
+      <span class="label-text">Forward ACME-Endpoint via HTTP</span>
+    </label>
+    <input
+      id="acme"
+      type="checkbox"
+      bind:checked={route.acme_http01_challenge}
+      class="toggle"
+      name="acme"
+      on:change={() => {
+        if (route.acme_http01_challenge) {
+          route.options.acme_port = 80;
+        } else {
+          delete route.options.acme_port;
+        }
+      }}
+    />
+  </div>
+  {#if route.acme_http01_challenge}
+    <div class="form-control mb-2">
+      <label for="acme" class="label">
+        <span class="label-text">ACME-HTTP-Port:</span>
+      </label>
+      <input
+        id="acme"
+        type="text"
+        bind:value={route.options.acme_port}
+        class="input input-bordered"
+        name="acme"
         required
       />
     </div>

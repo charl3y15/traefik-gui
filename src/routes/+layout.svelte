@@ -9,11 +9,10 @@
         <a href="/" class="btn btn-ghost normal-case text-xl">Home</a>
         <ul class="menu menu-horizontal px-1">
           <li><a href="/http_routes">HTTP Routes</a></li>
-          <!-- Weitere Links können hier hinzugefügt werden -->
+          <li><a href="/tls_routes">TLS Routes</a></li>
         </ul>
       </div>
-      <div class="navbar-center hidden lg:flex">
-      </div>
+      <div class="navbar-center hidden lg:flex"></div>
     </div>
   </nav>
   <div class="container mx-auto flex-grow p-4">

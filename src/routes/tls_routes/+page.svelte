@@ -1,25 +1,25 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
-  import type { HttpRoute } from "$lib/types";
-  import HttpRouteForm from "$lib/components/HttpRouteForm.svelte";
+  import type { TlsRoute } from "$lib/types";
+  import TlsRouteForm from "$lib/components/TlsRouteForm.svelte";
 
-  let http_routes = writable<HttpRoute[]>([]);
-  let route: HttpRoute = generateEmptyRoute();
+  let tls_routes = writable<TlsRoute[]>([]);
+  let route: TlsRoute = generateEmptyRoute();
 
   let errorMessage = "";
 
   async function fetchRoutes() {
-    const response = await fetch("/api/http_routes");
+    const response = await fetch("/api/tls_routes");
     const data = await response.json();
-    http_routes.set(data.http_routes as HttpRoute[]);
+    tls_routes.set(data.tls_routes as TlsRoute[]);
   }
 
   async function addRoute() {
     // clone route and remove id
-    let post_route: Partial<HttpRoute> = { ...route };
+    let post_route: Partial<TlsRoute> = { ...route };
     delete post_route.id;
-    const response = await fetch("/api/http_routes", {
+    const response = await fetch("/api/tls_routes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -47,7 +47,7 @@
   }
 
   async function deleteRoute(id: number) {
-    const response = await fetch(`/api/http_routes/${id}`, {
+    const response = await fetch(`/api/tls_routes/${id}`, {
       method: "DELETE",
     });
 
@@ -58,16 +58,16 @@
     }
   }
 
-  function ruleDisplay(route: HttpRoute): string {
+  function ruleDisplay(route: TlsRoute): string {
     switch (route.mode) {
       case "host":
         return `Host: "${route.options.host}"`;
-      case "rule":
-        return `Rule: "${route.options.rule}"`;
+      case "host_regex":
+        return `Host-Regex: "${route.options.host_regex}"`;
     }
   }
 
-  function generateEmptyRoute(): HttpRoute {
+  function generateEmptyRoute(): TlsRoute {
     return {
       id: 0,
       name: "",
@@ -81,14 +81,14 @@
 </script>
 
 <main class="container mx-auto p-4">
-  <h1 class="text-3xl font-bold mb-4">HTTP Routes</h1>
+  <h1 class="text-3xl font-bold mb-4">TLS Routes</h1>
 
   {#if errorMessage}
     <p class="text-red-500">{errorMessage}</p>
   {/if}
 
   <form on:submit|preventDefault={addRoute} class="mb-4">
-    <HttpRouteForm bind:route />
+    <TlsRouteForm bind:route />
     <button type="submit" class="btn btn-primary">Add Route</button>
   </form>
 
@@ -98,15 +98,22 @@
         <th>Name</th>
         <th>Target</th>
         <th>Rule</th>
+        <th>ACME-HTTP</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      {#each $http_routes as route}
+      {#each $tls_routes as route}
         <tr>
           <td>{route.name}</td>
           <td>{route.target}</td>
           <td>{ruleDisplay(route)}</td>
+          {#if route.acme_http01_challenge}
+            <td>Port: {route.options.acme_port}</td>
+          {:else}
+            <td>-</td>
+          {/if}
+
           <td>
             <button on:click={() => deleteRoute(route.id)} class="btn btn-error"
               >Delete</button
