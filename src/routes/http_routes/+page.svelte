@@ -34,8 +34,10 @@
         id: 0,
         name: "",
         target: "",
-        rule: "",
         mode: "host",
+        options: {
+          host: "",
+        },
       };
       errorMessage = "";
     } else {

@@ -9,6 +9,8 @@ This is especially useful if you only have terminal access.
 
 It is currently in development and not ready for production use.
 
+![example image](images/example.png)
+
 # Installation
 
 Traefik-GUI can be installed using docker:
