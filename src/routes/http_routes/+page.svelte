@@ -6,6 +6,7 @@
   let name = '';
   let target = '';
   let rule = '';
+  let errorMessage = '';
 
   async function fetchRoutes() {
     const response = await fetch('/api/http_routes');
@@ -27,8 +28,10 @@
       name = '';
       target = '';
       rule = '';
+      errorMessage = '';
     } else {
-      console.error('Failed to add route');
+      const errorData = await response.json();
+      errorMessage = errorData.error || 'Failed to add route';
     }
   }
 
@@ -49,6 +52,10 @@
 
 <main>
   <h1>HTTP Routes</h1>
+
+  {#if errorMessage}
+    <p style="color: red;">{errorMessage}</p>
+  {/if}
 
   <form on:submit|preventDefault={addRoute}>
     <div>
