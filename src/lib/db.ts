@@ -158,7 +158,7 @@ class DB {
           acme_rule = `Host(\`${route.options.host}\`) && (PathPrefix(\`/.well-known/acme-challenge/\`))`;
           break;
         case 'host_regex':
-          rule = `HostSNI(\`^${route.options.host_regex}$\`)`;
+          rule = `HostSNIRegexp(\`^${route.options.host_regex}$\`)`;
           acme_rule = `HostRegexp(\`^${route.options.host_regex}$\`) && (PathPrefix(\`/.well-known/acme-challenge/\`))`;
           break;
       }
