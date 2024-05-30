@@ -30,3 +30,7 @@ export type TlsRouteOptions = {
   acme_port?: number;
 }
 
+export interface Stats {
+  http_routes: number;
+  tls_routes: number;
+}
