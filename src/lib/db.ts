@@ -195,10 +195,8 @@ class DB {
 
     });
 
-    if (config.http.routers.length == 0) {
-      config = {
-        tcp: config.tcp
-      };
+    if (Object.keys(config.http.routers).length == 0) {
+      delete config.http;
     }
 
     fs.mkdirSync('traefik', { recursive: true });
