@@ -106,7 +106,7 @@ class DB {
 
   private generateTraefikConfig() {
 
-    const config: any = {
+    let config: any = {
       http: {
         routers: {},
         services: {}
@@ -196,7 +196,9 @@ class DB {
     });
 
     if (config.http.routers.length == 0) {
-      delete config.http;
+      config = {
+        tcp: config.tcp
+      };
     }
 
     fs.mkdirSync('traefik', { recursive: true });
