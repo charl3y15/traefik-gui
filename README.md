@@ -56,6 +56,6 @@ If you have any questions or problems, feel free to create an issue.
 
 This project is licensed under the [AGPL-3.0](LICENSE).
 
-The development and hosting was kindly sponsored by [Rahn IT](https://it-rahn.de/).
+Developed by [Rahn IT](https://it-rahn.de/).
 
 Thanks to the great people of [Traefik](https://traefik.io/), [SvelteKit](https://kit.svelte.dev/) and everyone who made this possible.
