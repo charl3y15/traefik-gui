@@ -133,10 +133,16 @@ class DB {
           break;
       }
 
-      config.http.routers[`gui-http-${route.name}-router`] = {
+      let router: any = {
         rule: rule,
         service: `gui-http-${route.name}-service`,
       };
+
+      if (route.options.priority !== undefined) {
+        router.priority = route.options.priority;
+      }
+
+      config.http.routers[`gui-http-${route.name}-router`] = router;
 
       config.http.services[`gui-http-${route.name}-service`] = {
         loadBalancer: {
@@ -163,13 +169,19 @@ class DB {
           break;
       }
 
-      config.tcp.routers[`gui-tls-${route.name}-router`] = {
+      let router: any = {
         rule: rule,
         service: `gui-tls-${route.name}-service`,
         tls: {
           passthrough: true
         }
       };
+
+      if (route.options.priority !== undefined) {
+        router.priority = route.options.priority;
+      }
+
+      config.tcp.routers[`gui-tls-${route.name}-router`] = router;
 
       config.tcp.services[`gui-tls-${route.name}-service`] = {
         loadBalancer: {

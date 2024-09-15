@@ -83,4 +83,16 @@
       />
     </div>
   {/if}
+  <div class="form-control mb-2">
+    <label for="priotity" class="label">
+      <span class="label-text">Priority:</span>
+    </label>
+    <input
+      id="priority"
+      type="number"
+      bind:value={route.options.priority}
+      class="input input-bordered"
+      name="priority"
+    />
+  </div>
 </div>

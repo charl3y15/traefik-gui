@@ -11,6 +11,7 @@ export type HttpRouteMode = 'host' | 'rule';
 export type HttpRouteOptions = {
   rule?: string;
   host?: string;
+  priority?: number;
 }
 
 export interface TlsRoute {
@@ -28,6 +29,7 @@ export type TlsRouteOptions = {
   host?: string;
   host_regex?: string;
   acme_port?: number;
+  priority?: number;
 }
 
 export interface Stats {

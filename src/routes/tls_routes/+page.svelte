@@ -19,6 +19,11 @@
     // clone route and remove id
     let post_route: Partial<TlsRoute> = { ...route };
     delete post_route.id;
+
+    if (post_route.options?.priority == null) {
+      delete post_route.options?.priority;
+    }
+
     const response = await fetch("/api/tls_routes", {
       method: "POST",
       headers: {
@@ -99,6 +104,7 @@
         <th>Target</th>
         <th>Rule</th>
         <th>ACME-HTTP</th>
+        <th>Priority</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -113,6 +119,13 @@
           {:else}
             <td>-</td>
           {/if}
+          <td>
+            {#if route.options.priority == null}
+              -
+            {:else}
+              {route.options.priority}
+            {/if}
+          </td>
 
           <td>
             <button on:click={() => deleteRoute(route.id)} class="btn btn-error"
