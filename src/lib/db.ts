@@ -46,6 +46,44 @@ class DB {
     return info.lastInsertRowid;
   }
 
+  updateHttpRoute(id: number, data: Partial<HttpRoute>): boolean {
+    const query = this.database.prepare("SELECT * FROM http_routes WHERE id = ?").all();
+
+    if (query.length == 0) {
+      return false;
+    }
+
+    const route = query[0] as any;
+
+    let updated: HttpRoute = {
+      id: route.id,
+      name: route.name,
+      target: route.target,
+      mode: route.mode,
+      options: JSON.parse(route.options)
+    };
+
+    delete (data['id']);
+
+    if (data.name !== undefined) {
+      updated.name = data.name;
+    }
+    if (data.target !== undefined) {
+      updated.target = data.target;
+    }
+    if (data.mode !== undefined) {
+      updated.mode = data.mode;
+    }
+    if (data.options !== undefined) {
+      updated.options = data.options;
+    }
+
+    const stmt = this.database.prepare("UPDATE http_routes SET name = ?, target = ?, mode = ?, options = ? WHERE id = ?")
+    const info = stmt.run(updated.name, updated.target, updated.mode, JSON.stringify(updated.options), updated.id);
+
+    return info.changes === 1;
+  }
+
   deleteHttpRoute(id: number): boolean {
     const info = this.database.prepare('DELETE FROM http_routes WHERE id = ?').run(id);
 
@@ -78,6 +116,49 @@ class DB {
     }
 
     return info.lastInsertRowid;
+  }
+
+  updateTlsRoute(id: number, data: Partial<TlsRoute>): boolean {
+    const query = this.database.prepare("SELECT * FROM tls_routes WHERE id = ?").all();
+
+    if (query.length == 0) {
+      return false;
+    }
+
+    const route = query[0] as any;
+
+    let updated: TlsRoute = {
+      id: route.id,
+      name: route.name,
+      target: route.target,
+      mode: route.mode,
+      options: JSON.parse(route.options),
+      acme_http01_challenge: route.acme_http01_challenge
+    };
+
+    delete (data['id']);
+
+    if (data.name !== undefined) {
+      updated.name = data.name;
+    }
+    if (data.target !== undefined) {
+      updated.target = data.target;
+    }
+    if (data.mode !== undefined) {
+      updated.mode = data.mode;
+    }
+    if (data.options !== undefined) {
+      updated.options = data.options;
+    }
+    if (data.acme_http01_challenge !== undefined) {
+      updated.acme_http01_challenge = data.acme_http01_challenge;
+    }
+
+
+    const stmt = this.database.prepare("UPDATE tls_routes SET name = ?, target = ?, mode = ?, options = ?, acme_http01_challenge = ? WHERE id = ?")
+    const info = stmt.run(updated.name, updated.target, updated.mode, JSON.stringify(updated.options), updated.acme_http01_challenge, updated.id);
+
+    return info.changes === 1;
   }
 
   deleteTlsRoute(id: number): boolean {
