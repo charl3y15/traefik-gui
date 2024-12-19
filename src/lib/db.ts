@@ -271,11 +271,16 @@ class DB {
       };
 
       if (route.acme_http01_challenge) {
-        config.http.routers[`gui-tls-${route.name}-router`] = {
+        let acme_router: any = {
           rule: acme_rule,
           service: `gui-tls-${route.name}-service`,
         };
 
+        if (route.options.priority !== undefined) {
+          acme_router.priority = route.options.priority;
+        }
+
+        config.http.routers[`gui-tls-${route.name}-router`] = acme_router;
         const host = route.target.split(':')[0];
 
 
