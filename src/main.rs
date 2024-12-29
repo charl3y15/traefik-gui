@@ -31,6 +31,7 @@ async fn rocket() -> _ {
             routes![
                 index,
                 redeploy,
+                import,
                 http::index,
                 http::create,
                 http::update,
@@ -99,6 +100,21 @@ async fn redeploy(conn: DbConn) -> Flash<Redirect> {
     export_traefik_config(&conn).await;
 
     Flash::success(Redirect::to("/"), "Traefik config updated")
+}
+
+#[post("/import")]
+async fn import(conn: DbConn) -> Flash<Redirect> {
+    if let Ok(existing_config) = std::fs::read_to_string("/app/config/fileConfig.yml") {
+        if let Ok(_) = serde_yaml::from_str::<traefik::TraefikConfig>(&existing_config) {
+            // Successfully parsed, now export combined config
+            export_traefik_config(&conn).await;
+            Flash::success(Redirect::to("/"), "Configuration imported successfully")
+        } else {
+            Flash::error(Redirect::to("/"), "Invalid configuration file format")
+        }
+    } else {
+        Flash::error(Redirect::to("/"), "Could not read configuration file")
+    }
 }
 
 async fn generate_traefik_config(conn: &DbConn) -> String {

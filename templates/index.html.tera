@@ -31,9 +31,14 @@
 
     <div class="card">
         <h2>Config File</h2>
-        <form action="/redeploy" method="post">
-            <input type="submit" value="Redeploy" class="btn">
-        </form>
+        <div class="button-group">
+            <form action="/redeploy" method="post" style="display: inline;">
+                <input type="submit" value="Redeploy" class="btn">
+            </form>
+            <form action="/import" method="post" style="display: inline;">
+                <input type="submit" value="Import External Config" class="btn">
+            </form>
+        </div>
         <div>
             <pre>{{ config }}</pre>
         </div>

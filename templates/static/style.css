@@ -230,3 +230,9 @@ button {
     font-size: 1.25rem;
     text-decoration: none;
 }
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
