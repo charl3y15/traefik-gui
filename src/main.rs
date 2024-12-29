@@ -107,7 +107,7 @@ async fn generate_traefik_config(conn: &DbConn) -> String {
 
     // Import existing config if it exists
     if let Ok(existing_config) = std::fs::read_to_string("/app/config/fileConfig.yml") {
-        if let Ok(mut existing) = serde_yaml::from_str::<traefik::TraefikConfig>(&existing_config) {
+        if let Ok(existing) = serde_yaml::from_str::<traefik::TraefikConfig>(&existing_config) {
             // Merge existing config with generated config
             config.http.routers.extend(existing.http.routers);
             config.http.services.extend(existing.http.services);

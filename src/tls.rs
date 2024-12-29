@@ -12,7 +12,7 @@ use crate::{
     schema::tls_routes,
     traefik::{
         HttpLoadBalancer, HttpRouter, HttpServer, HttpService, TcpLoadBalancer, TcpRouter,
-        TcpServer, TcpService, TcpTls, TraefikConfig,
+        TcpServer, TcpService, TcpTls, TraefikConfig, TcpConfig, // Added TcpConfig here
     },
     DbConn,
 };
@@ -100,31 +100,37 @@ impl TlsRoute {
                     format!("Host(`{}`)", route.host)
                 };
 
-                config.tcp.routers.insert(
-                    router_name.clone(),
-                    TcpRouter {
-                        priority: route.priority,
-                        service: router_name.clone(),
-                        rule: host_rule,
-                        tls: Some(TcpTls { passthrough: true }),
-                    },
-                );
-
-                let mut target = route.target.clone();
-                if target.rfind(':') == None {
-                    target.push_str(":443");
+                if config.tcp.is_none() {
+                    config.tcp = Some(TcpConfig::new());
                 }
 
-                config.tcp.services.insert(
-                    router_name.clone(),
-                    TcpService {
-                        load_balancer: TcpLoadBalancer {
-                            servers: vec![TcpServer {
-                                address: format!("{}", target),
-                            }],
+                if let Some(tcp) = &mut config.tcp {
+                    tcp.routers.insert(
+                        router_name.clone(),
+                        TcpRouter {
+                            priority: route.priority,
+                            service: router_name.clone(),
+                            rule: host_rule,
+                            tls: Some(TcpTls { passthrough: true }),
                         },
-                    },
-                );
+                    );
+
+                    let mut target = route.target.clone();
+                    if target.rfind(':') == None {
+                        target.push_str(":443");
+                    }
+
+                    tcp.services.insert(
+                        router_name.clone(),
+                        TcpService {
+                            load_balancer: TcpLoadBalancer {
+                                servers: vec![TcpServer {
+                                    address: format!("{}", target),
+                                }],
+                            },
+                        },
+                    );
+                }
 
                 if let Some(acme_port) = route.acme_http_passthrough {
                     // find the last colon in the target and replace the port after it with the acme port

@@ -16,7 +16,7 @@ services:
     volumes:
       - gui-data:/app/db
       - config:/app/config
-      - ./fileConfig.yml:/app/config/fileConfig.yml:ro
+      - /mnt/c/Github/traefik-gui/fileConfig.yml:/app/config/fileConfig.yml:ro
       # - ./config:/app/config # for local development
 
   traefik:

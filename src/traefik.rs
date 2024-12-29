@@ -1,25 +1,29 @@
 use std::collections::BTreeMap;
+use std::collections::HashMap;
+use rocket::serde::{Serialize, Deserialize};
 
-use serde::Serialize;
-
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
+#[serde(crate = "rocket::serde")]
 pub struct TraefikConfig {
-    #[serde(skip_serializing_if = "HttpConfig::is_empty")]
     pub http: HttpConfig,
-    #[serde(skip_serializing_if = "TcpConfig::is_empty")]
-    pub tcp: TcpConfig,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tls: Option<TlsConfig>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tcp: Option<TcpConfig>,
 }
 
 impl TraefikConfig {
     pub fn new() -> Self {
         Self {
             http: HttpConfig::new(),
-            tcp: TcpConfig::new(),
+            tls: None,
+            tcp: None,
         }
     }
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
+#[serde(crate = "rocket::serde")]
 pub struct HttpConfig {
     #[serde(skip_serializing_if = "BTreeMap::is_empty")]
     pub routers: BTreeMap<String, HttpRouter>,
@@ -60,7 +64,8 @@ impl HttpConfig {
     }
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
+#[serde(crate = "rocket::serde")]
 pub struct HttpRouter {
     pub rule: String,
     pub service: String,
@@ -70,34 +75,40 @@ pub struct HttpRouter {
     pub middlewares: Vec<String>,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
+#[serde(crate = "rocket::serde")]
 pub struct HttpService {
     #[serde(rename = "loadBalancer")]
     pub load_balancer: HttpLoadBalancer,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
+#[serde(crate = "rocket::serde")]
 pub struct HttpLoadBalancer {
     pub servers: Vec<HttpServer>,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
+#[serde(crate = "rocket::serde")]
 pub struct HttpServer {
     pub url: String,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
+#[serde(crate = "rocket::serde")]
 pub struct HttpMiddleware {
     #[serde(rename = "redirectScheme")]
     redirect_scheme: Option<HttpRedirectScheme>,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
+#[serde(crate = "rocket::serde")]
 pub struct HttpRedirectScheme {
     scheme: HttpScheme,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
+#[serde(crate = "rocket::serde")]
 pub enum HttpScheme {
     #[serde(rename = "http")]
     _Http,
@@ -105,7 +116,8 @@ pub enum HttpScheme {
     Https,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
+#[serde(crate = "rocket::serde")]
 pub struct TcpConfig {
     #[serde(skip_serializing_if = "BTreeMap::is_empty")]
     pub routers: BTreeMap<String, TcpRouter>,
@@ -126,7 +138,8 @@ impl TcpConfig {
     }
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
+#[serde(crate = "rocket::serde")]
 pub struct TcpRouter {
     pub rule: String,
     pub service: String,
@@ -135,23 +148,63 @@ pub struct TcpRouter {
     pub tls: Option<TcpTls>,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
+#[serde(crate = "rocket::serde")]
 pub struct TcpTls {
     pub passthrough: bool,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
+#[serde(crate = "rocket::serde")]
 pub struct TcpService {
     #[serde(rename = "loadBalancer")]
     pub load_balancer: TcpLoadBalancer,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
+#[serde(crate = "rocket::serde")]
 pub struct TcpLoadBalancer {
     pub servers: Vec<TcpServer>,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
+#[serde(crate = "rocket::serde")]
 pub struct TcpServer {
     pub address: String,
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug)]
+#[serde(crate = "rocket::serde")]
+pub struct TlsConfig {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub certificates: Option<Vec<TlsCertificate>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub options: Option<HashMap<String, TlsOptions>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub stores: Option<HashMap<String, TlsStore>>,
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug)]
+#[serde(crate = "rocket::serde")]
+pub struct TlsCertificate {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub cert_file: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub key_file: Option<String>,
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug)]
+#[serde(crate = "rocket::serde")]
+pub struct TlsOptions {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub min_version: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub cipher_suites: Option<Vec<String>>,
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug)]
+#[serde(crate = "rocket::serde")]
+pub struct TlsStore {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub default_certificate: Option<TlsCertificate>,
 }
