@@ -1,0 +1,1617 @@
+﻿http:
+
+  ## EXTERNAL ROUTING - Only use if you want to proxy something manually ##
+  routers:
+    #metrics:
+        #address: :8082
+
+   # # Homeassistant routing - Remove if not used
+   # homeassistant:
+ #       entryPoints:
+  #        - https
+  #      rule: 'Host(`homeassistant.cd1git.com`)'
+  #      service: homeassistant
+  #      middlewares:
+  #        # - "crowdsec-bouncer@file"
+   #       - "securityHeaders"
+  #      tls:
+  #          certResolver: letsencrypt
+         # - "fail2ban@file"
+      #    - "authentik@file"
+       #   - "traefikgeoip2@file"
+    #      - "crowdsec-bouncer-raspberrypi"
+         # - "crowdsec-bouncer-raspberrypi@file"
+         # - "http-cache@file"
+    syncthing:
+        entryPoints:
+          - https
+        rule: 'Host(`syncthing.cd1git.com`)'
+        service: syncthing
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+       #   - "traefikgeoip2@file"
+        #  - "traefik-sablier@file"
+    # pterodactyl-panel routing
+    pterodactyl-panel:
+        entryPoints:
+          - https
+        rule: 'Host(`panel.cd1git.com`)'
+        service: pterodactyl-panel
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          #- "auth@file"
+          - "corsAll@file"
+        #  - "traefik-sablier@file"
+      #    - "my-sablier"
+    pelican-panel:
+        entryPoints:
+          - https
+        rule: 'Host(`panel2.cd1git.com`)'
+        service: pelican-panel
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          #- "auth@file"
+          - "corsAll@file"
+        #  - "traefik-sablier@file"
+      #    - "my-sablier"
+    pterodactyl-node:
+        entryPoints:
+          - https
+        rule: 'Host(`node.cd1git.com`)'
+        service: pterodactyl-node
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          #- "auth@file"
+          - "corsAll@file"
+        #  - "traefik-sablier@file"
+         # - "my-sablier"
+    palworld:
+        entryPoints:
+          - https
+        rule: 'Host(`palworld.cd1git.com`)'
+        service: palworld
+        middlewares:
+    #      # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          #- "auth@file"
+          - "corsAll@file"
+    pterodactyl-node2:
+        entryPoints:
+          - https
+        rule: 'Host(`node2.cd1git.com`)'
+        service: pterodactyl-node2
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          #- "auth@file"
+          - "corsAll@file"
+        #  - "my-sablier"
+        #  - "tower-sablier@file"
+    dockerwebgui:
+        entryPoints:
+          - https
+        rule: 'Host(`dockerwebgui.cd1git.com`)'
+        service: dockerwebgui
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    qbittorrent:
+        entryPoints:
+          - https
+        rule: 'Host(`qbittorrent.cd1git.com`)'
+        service: qbittorrent
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    jdownloader2:
+        entryPoints:
+          - https
+        rule: 'Host(`jdownloader.cd1git.com`)'
+        service: jdownloader2
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    nginx:
+        entryPoints:
+          - https
+        rule: 'Host(`proxy.cd1git.com`)'
+        service: nginx
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+       #  - "crowdsec-bouncer-raspberrypi@file"
+    homepage:
+        entryPoints:
+          - https
+        rule: 'Host(`homepage.cd1git.com`)'
+        service: homepage
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+#    traefik:
+#        entryPoints:
+ #         - https
+#        rule: 'Host(`traefik.cd1git.com`)'
+#        service: traefik
+#        middlewares:
+
+  #        - "securityHeaders"
+  #        - "auth@file"
+    pycharm:
+        entryPoints:
+          - https
+        rule: 'Host(`pycharm.cd1git.com`)'
+        service: pycharm
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "pycharm-redirect@file"
+          - "authentik@file"
+    portainer:
+        entryPoints:
+          - https
+        rule: 'Host(`portainer.cd1git.com`)'
+        service: portainer
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+         # - "traefik-sablier@file"
+    dozzle:
+        entryPoints:
+          - https
+        rule: 'Host(`dozzle.cd1git.com`)'
+        service: dozzle
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+          # "traefik-sablier@file"
+    pihole:
+        entryPoints:
+          - https
+        rule: 'Host(`pihole.cd1git.com`)'
+        service: pihole
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          #- "my-middleflare"
+          - "pihole-redirect@file"
+          - "authentik@file"
+       #   - "traefikgeoip2@file"
+      #    - "cloudflarewarp@file"
+      #    - "traefik-real-ip@file"
+    code:
+        entryPoints:
+          - https
+        rule: 'Host(`code.cd1git.com`)'
+        service: code
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "auth@file"
+        #  - "traefik-sablier@file"
+    unraid:
+        entryPoints:
+          - https
+        rule: 'Host(`unraid.cd1git.com`)'
+        service: unraid
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+         # - "authentik@file"
+       #   - "fail2ban@file"
+          - "authentik@file"
+
+       #   - "traefikgeoip2@file"
+       #   - "cloudflarewarp@file"
+       #   - "traefik-real-ip@file"
+         # - "traefikgeoip2@file"
+    tower:
+        entryPoints:
+          - https
+        rule: 'Host(`tower.cd1git.com`)'
+        service: tower
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+         # - "auth@file"
+      #    - "corsAll@file"
+      #    - "cloudflarewarp@file"
+    bazarr:
+        entryPoints:
+          - https
+        rule: 'Host(`bazarr.cd1git.com`)'
+        service: bazarr
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    steam:
+        entryPoints:
+          - https
+        rule: 'Host(`steam.cd1git.com`)'
+        service: steam
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+          #- "auth@file"
+       #   - "my-sablier"
+   # plex:
+   #     entryPoints:
+   #       - https
+  #      rule: 'Host(`plex.cd1git.com`)'
+    #    middlewares:
+    #      - "securityHeaders"
+   #       - "auth@file"
+    dockerwebgui2:
+        entryPoints:
+          - https
+        rule: 'Host(`dockerwebgui2.cd1git.com`)'
+        service: dockerwebgui2
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+        #  - "tower-sablier"
+    grafana:
+        entryPoints:
+          - https
+        rule: 'Host(`grafana.cd1git.com`)'
+        service: grafana
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "gzip@file"
+          - "authentik@file"
+        #  - "tower-sablier@file"
+    stash:
+        entryPoints:
+          - https
+        rule: 'Host(`stash.cd1git.com`)'
+        service: stash
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+       #   - "traefik-sablier@file"
+    stash2:
+        entryPoints:
+          - https
+        rule: 'Host(`stash2.cd1git.com`)'
+        service: stash2
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    xbackbone:
+        entryPoints:
+          - https
+        rule: 'Host(`xbackbone.cd1git.com`)'
+        service: xbackbone
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+        #  - "my-sablier"
+          #- "traefikgeoip"
+    remotely:
+        entryPoints:
+          - https
+        rule: 'Host(`remotely.cd1git.com`)'
+        service: remotely
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+   # asus:
+    #    entryPoints:
+     ##     - https
+     #   rule: 'Host(`asusrouter.cd1git.com`)'
+     ##   service: asus
+     #   middlewares:
+     #     # - "crowdsec-bouncer@file"
+     #     - "securityHeaders"
+      #    - "authentik@file"
+  #  nextcloud:
+   #     entryPoints:
+   #      - https
+     #   rule: 'Host(`nextcloud.cd1git.com`)'
+    #    service: nextcloud
+     #   middlewares:
+     #     # - "crowdsec-bouncer@file"
+    #      - "securityHeaders"
+   #       #- "authentik@file"
+    jellyfin:
+        entryPoints:
+          - https
+        rule: 'Host(`jellyfin.cd1git.com`)'
+        service: jellyfin
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+   # wireguard-easy:
+   #     entryPoints:
+    #      - https
+       #   - cd1git-wg
+   #     rule: 'Host(`wg.cd1git.com`)'
+    #    service: wireguard-easy
+    #    middlewares:
+    #     - "securityHeaders"
+        #  - "authentik@file"
+    cd1git:
+        entryPoints:
+          - https
+        rule: 'Host(`cd1git.com`)'
+        service: cd1git
+        middlewares:
+        #  # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    filebrowser-tower:
+        entryPoints:
+          - https
+        rule: 'Host(`filebrowser2.cd1git.com`)'
+        service: filebrowser-tower
+        middlewares:
+         # # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    filebrowser-cd1git:
+        entryPoints:
+          - https
+        rule: 'Host(`filebrowser.cd1git.com`)'
+        service: filebrowser-cd1git
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    truenas:
+        entryPoints:
+          - https
+        rule: 'Host(`truenas.cd1git.com`)'
+        service: truenas
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    uptime-pihole:
+        entryPoints:
+          - https
+        rule: 'Host(`uptime.cd1git.com`)'
+        service: uptime-pihole
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    homeassistant-docker:
+        entryPoints:
+          - https
+        rule: 'Host(`homeassistant2.cd1git.com`)'
+        service: homeassistant-docker
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    chatbot:
+        entryPoints:
+          - https
+        rule: 'Host(`chatbot.cd1git.com`)'
+        service: chatbot
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+  #      tls:
+  #          certResolver: letsencrypt
+ #   netbird:
+  #      entryPoints: https
+   #     rule: "Host(netbird.cd1git.com)"
+       # tls:
+       #     certResolver: http
+   #     service: netbird
+    netbird:
+        entryPoints: https
+        rule: "Host(`netbird.cd1git.com`)"
+        tls:
+            certResolver: letsencrypt
+        service: netbird
+  #      tls:
+  #          certResolver: letsencrypt
+    netbirdapi:
+        entryPoints: https
+        rule: "Host(`netbirdapi.cd1git.com`) && PathPrefix(`/api`)"
+        tls:
+            certResolver: letsencrypt
+        service: netbirdapi
+
+    netbirdmanagement:
+        entryPoints: https
+        rule: "Host(`netbirdapi.cd1git.com`) && PathPrefix(`/management`)"
+        tls:
+            certResolver: letsencrypt #http
+        service: netbirdmanagement
+
+    netbirdsignal:
+        entryPoints: https
+        rule: "Host(`netbirdapi.cd1git.com`) && PathPrefix(`/signalexchange`)"
+   #     tls:
+    #        certResolver: http
+        service: netbirdsignal
+
+    graylog:
+        entryPoints:
+          - https
+        rule: 'Host(`logs.cd1git.com`)'
+        service: graylog
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    healthchecks:
+        entryPoints:
+          - https
+        rule: 'Host(`healthchecks.cd1git.com`)'
+        service: healthchecks
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    prometheus:
+        entryPoints:
+          - https
+        rule: 'Host(`prometheus.cd1git.com`)'
+        service: prometheus
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    dozzle-tower:
+        entryPoints:
+          - https
+        rule: 'Host(`dozzle2.cd1git.com`)'
+        service: dozzle-tower
+        middlewares:
+        #  # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    frigate:
+        entryPoints:
+          - https
+        rule: 'Host(`frigate.cd1git.com`)'
+        service: frigate
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    immich:
+        entryPoints:
+          - https
+        rule: 'Host(`immich.cd1git.com`)'
+        service: immich
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+        #  - "authentik@file"
+    gitlab:
+        entryPoints:
+          - https
+        rule: 'Host(`gitlab.cd1git.com`)'
+        service: gitlab
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+    docker-registry:
+        entryPoints:
+          - https
+        rule: 'Host(`registry.cd1git.com`)'
+        service: docker-registry
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+    ferdium:
+        entryPoints:
+          - https
+        rule: 'Host(`ferdium.cd1git.com`)'
+        service: ferdium
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+    youtube-dl2:
+        entryPoints:
+          - https
+        rule: 'Host(`youtube-dl2.cd1git.com`)'
+        service: youtube-dl2
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+
+    discord:
+        entryPoints:
+          - https
+        rule: 'Host(`discord.cd1git.com`)'
+        service: discord
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    mullvad:
+        entryPoints:
+          - https
+        rule: 'Host(`mvad.cd1git.com`)'
+        service: mullvad
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    grocy:
+        entryPoints:
+          - https
+        rule: 'Host(`grocy.cd1git.com`)'
+        service: grocy
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+       #   - "authentik@file"
+    tdarr:
+        entryPoints:
+          - https
+        rule: 'Host(`tdarr.cd1git.com`)'
+        service: tdarr
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    nextcloud-tower:
+        entryPoints:
+          - https
+        rule: 'Host(`ncloud.cd1git.com`)'
+        service: nextcloud-tower
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+      #    - "authentik@file"
+    cosmos:
+        entryPoints:
+          - https
+        rule: 'Host(`cosmos.cd1git.com`)'
+        service: cosmos
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    tdarr-tower:
+        entryPoints:
+          - https
+        rule: 'Host(`tdarr2.cd1git.com`)'
+        service: tdarr-tower
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    xbackbone2:
+        entryPoints:
+          - https
+        rule: 'Host(`xbackbone2.cd1git.com`)'
+        service: xbackbone2
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+        #  - "my-sablier"
+          #- "traefikgeoip"
+    photoprism:
+        entryPoints:
+          - https
+        rule: 'Host(`photos.cd1git.com`)'
+        service: photoprism
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    wallabag:
+        entryPoints:
+          - https
+        rule: 'Host(`wallabag.cd1git.com`)'
+        service: wallabag
+        middlewares:
+     #     # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+        #  - "authentik@file"
+    guacamole-tower:
+        entryPoints:
+          - https
+        rule: 'Host(`guac3.cd1git.com`)'
+        service: guacamole-tower
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    zipline:
+        entryPoints:
+          - https
+        rule: 'Host(`zipline.cd1git.com`)'
+        service: zipline
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+     #     - "authentik@file"
+    keycloak:
+        entryPoints:
+          - https
+        rule: 'Host(`keycloak.cd1git.com`)'
+        service: keycloak
+        middlewares:
+   #       # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+    coturn:
+        entryPoints:
+          - https
+        rule: 'Host(`turn.cd1git.com`)'
+        service: coturn
+        middlewares:
+    #      # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+    homarr-cd1git:
+        entryPoints:
+          - https
+        rule: 'Host(`homarr.cd1git.com`)'
+        service: homarr-cd1git
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    radarr:
+        entryPoints:
+          - https
+        rule: 'Host(`radarr.cd1git.com`)'
+        service: radarr
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    sonarr:
+        entryPoints:
+          - https
+        rule: 'Host(`sonarr.cd1git.com`)'
+        service: sonarr
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    pgadmin:
+        entryPoints:
+          - https
+        rule: 'Host(`pgadmin.cd1git.com`)'
+        service: pgadmin
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    proxmox-cd1git:
+        entryPoints:
+          - https
+        rule: 'Host(`pve.cd1git.com`)'
+        service: proxmox-cd1git
+        middlewares:
+       #   # - "crowdsec-bouncer@file"
+        #  - "https-redirect@file"
+       #   - "frameAllow@file"
+          - "securityHeaders"
+          - "authentik@file"
+    proxmox:
+        entryPoints:
+          - https
+        rule: 'Host(`pvecd1.cd1git.com`)'
+        service: proxmox
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    authentik:
+        entryPoints:
+        - https
+        rule: 'Host(`sso.cd1git.com`) || HostRegexp(`{subdomain:[a-z0-9]+}.cd1git.com`) && PathPrefix(`/outpost.goauthentik.io/`)'
+        service: authentik
+        middlewares:
+        #   # - "crowdsec-bouncer@file"
+        - "securityHeaders"
+    authelia-dashboard:
+        entryPoints:
+        - https
+        rule: 'Host(`auth-admin.cd1git.com`)'
+        service: authelia-dashboard
+        middlewares:
+        #   # - "crowdsec-bouncer@file"
+        - "securityHeaders"
+    tautulli:
+        entryPoints:
+          - https
+        rule: 'Host(`tautulli.cd1git.com`)'
+        service: tautulli
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    sftpgoui:
+        entryPoints:
+          - https
+        rule: 'Host(`sftpgoui.cd1git.com`)'
+        service: sftpgoui
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "authentik@file"
+    sftpgoadmin:
+        entryPoints:
+          - https
+        rule: 'Host(`sftpgoadmin.cd1git.com`)'
+        service: sftpgoadmin
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+          - "sftpgoadmin-redirect@file"
+          - "authentik@file"
+    sftp:
+        entryPoints:
+          - https
+        rule: 'Host(`sftp.cd1git.com`)'
+        service: sftp
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+        #  - "sftpgoadmin-redirect@file"
+          - "authentik@file"
+    seafile:
+        entryPoints:
+          - https
+        rule: 'Host(`seafile.cd1git.com`)'
+        service: sftp
+        middlewares:
+          # - "crowdsec-bouncer@file"
+          - "securityHeaders"
+        #  - "sftpgoadmin-redirect@file"
+          - "authentik@file"
+
+# authentik:
+# entryPoints:
+#  - https
+# rule: 'Host(`sso.cd1git.com`) || HostRegexp(`{subdomain:[a-z0-9]+}.cd1git.com`) && PathPrefix(`/outpost.goauthentik.io/`)'
+# service: authentik
+# middlewares:
+# #   # - "crowdsec-bouncer@file"
+#   - "securityHeaders"
+
+  ## SERVICES ##
+  ## SERVICES ##
+  services:
+    #metrics:
+     # loadBalancer:
+      #  servers:
+          #- url: http://192.168.50.37:8082
+    # Homeassistant service - Remove if not used
+   # homeassistant:
+   #   loadBalancer:
+    #    servers:
+  #        - url: http://192.168.50.37:8123
+    syncthing:
+      loadBalancer:
+        servers:
+          - url: http://192.168.50.37:8384
+    homepage:
+      loadBalancer:
+        servers:
+          - url: http://192.168.50.37:3555
+    pterodactyl-panel:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.162:80
+    pelican-panel:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.37:8022
+    pterodactyl-node:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.37:8443
+    pterodactyl-node2:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.223:8443
+    dockerwebgui:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.37:1111
+    qbittorrent:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.37:18990
+    nginx:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.37:7818
+    pycharm:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.37:16080
+#    traefik:
+#      loadBalancer:
+ #       servers:
+ #        - url: http://192.168.50.37:8183
+    dozzle:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.37:55455
+    code:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.37:38443
+    pihole:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.20:80
+    unraid:
+      loadBalancer:
+        servers:
+         - url: https://192-168-50-223.85f590a1543b605d54e1c693b3f6ba902a07d9ba.myunraid.net #https://192.168.50.37:80
+    tower:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.223:80
+    bazarr:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.37:6767
+    steam:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.37:8084
+ #   plex:
+ #     loadBalancer:
+ #       servers:
+  #       - url: http://192.168.50.37:32400
+    dockerwebgui2:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.223:1111
+    grafana:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.223:3000
+    portainer:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.37:9996
+    jdownloader2:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.37:17807
+    stash:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.37:9999
+    stash2:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.70:9999
+    xbackbone:
+      loadBalancer:
+        servers:
+         - url: https://192.168.50.37:19964
+    xbackbone2:
+      loadBalancer:
+        servers:
+         - url: https://192.168.50.223:19964
+    remotely:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.37:9280
+   # asus:
+    #  loadBalancer:
+     #   servers:
+      #   - url: https://syneofeternity.asuscomm.com:8443
+  #  nextcloud:
+  #    loadBalancer:
+  #      servers:
+   #      - url: https://192.168.50.156:443
+    jellyfin:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.37:8096
+   # wireguard-easy:
+    #  loadBalancer:
+    #    servers:
+     #    - url: http://192.168.50.37:51821 # webui
+     #    - url: http://192.168.50.37:55820/udp # vpn port
+    cd1git:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.37:80 # webui
+         - url: http://192.168.50.37:1111 # filebrowser
+         - url: http://192.168.50.37:8999
+    filebrowser-tower:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.223:30000
+    truenas:
+      loadBalancer:
+        servers:
+         - url: https://192.168.50.39:443
+    uptime-pihole:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.20:3001
+    homeassistant-docker:
+      loadBalancer:
+        servers:
+         - url: http://192.168.50.46:8123
+
+    #netbird:
+    #    loadbalancer:
+    #        passHostHeader: true
+    #        servers:
+    #            - url: http://192.168.50.37:7443
+    netbird:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.37:8089
+    netbirdapi:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.37:44301
+
+    netbirdmanagement:
+        loadbalancer:
+            servers:
+                - url: h2c://192.168.50.37:44301
+
+    netbirdsignal:
+        loadbalancer:
+            servers:
+                - url: h2c://192.168.50.37:10000
+    graylog:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.223:9000
+    healthchecks:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.37:11412
+    prometheus:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.37:9090
+    dozzle-tower:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.223:8780
+    frigate:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.37:5000
+    immich:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.37:38189
+    gitlab:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.37:9080 #9080 httpp
+    docker-registry:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.37:5111 #9080 httpp
+    ferdium:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.223:3333
+    youtube-dl2:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.37:48754
+    discord:
+        loadbalancer:
+            servers:
+                - url: https://192.168.50.37:3081
+    mullvad:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.37:34000
+    grocy:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.37:9283
+    chatbot:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.37:45000
+    tdarr:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.37:8265
+    nextcloud-tower:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.223:11000
+    cosmos:
+        loadbalancer:
+            servers:
+                - url: https://192.168.50.37:41143
+    tdarr-tower:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.223:8265
+    photoprism:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.37:42342
+    wallabag:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.37:6500
+    guacamole-tower:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.223:8157
+    zipline:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.37:8092
+    keycloak:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.223:8777
+    coturn:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.223:3478
+    homarr-cd1git:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.37:10004
+    radarr:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.37:17878
+    sonarr:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.37:18989
+    pgadmin:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.37:8792
+    palworld:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.37:8211
+    proxmox:
+        loadbalancer:
+            servers:
+                - url: https://192.168.50.140:8006
+    authentik:
+        loadbalancer:
+            servers:
+                - url: http://192.168.50.223:9000
+    proxmox-cd1git:
+        loadbalancer:
+            servers:
+                - url: https://192.168.50.140:8006
+    authelia-dashboard:
+        loadbalancer:
+            servers:
+                - url: https://192.168.50.37:9092
+    filebrowser-cd1git:
+         loadbalancer:
+            servers:
+                - url: http://192.168.50.37:18312
+    tautulli:
+         loadbalancer:
+            servers:
+                - url: http://192.168.50.37:8181
+    sftpgoui:
+         loadbalancer:
+            servers:
+                - url: http://192.168.50.223:2221
+    sftpgoadmin:
+         loadbalancer:
+            servers:
+                - url: http://192.168.50.223:2221
+    sftp:
+         loadbalancer:
+            servers:
+                - url: http://192.168.50.223:20222
+    seafile:
+         loadbalancer:
+            servers:
+                - url: http://192.168.50.110:8781
+  ## MIDDLEWARES ##
+
+  middlewares:
+    frameAllow:
+      headers:
+        frameDeny: false # eed-box
+    https-redirect:
+      redirectScheme:
+        scheme: https
+        permanent: true
+    authentik:
+      forwardauth:
+        address: http://authentik:9000/outpost.goauthentik.io/auth/traefik
+        trustForwardHeader: true
+        authResponseHeaders:
+          - X-authentik-username
+          - X-authentik-groups
+          - X-authentik-email
+          - X-authentik-name
+          - X-authentik-uid
+          - X-authentik-jwt
+          - X-authentik-meta-jwks
+          - X-authentik-meta-outpost
+          - X-authentik-meta-provider
+          - X-authentik-meta-app
+          - X-authentik-meta-version
+
+    authentik-tower:
+      forwardauth:
+        address: http://192.168.50.223:9000/outpost.goauthentik.io/auth/traefik
+        trustForwardHeader: true
+        authResponseHeaders:
+          - X-authentik-username
+          - X-authentik-groups
+          - X-authentik-email
+          - X-authentik-name
+          - X-authentik-uid
+          - X-authentik-jwt
+          - X-authentik-meta-jwks
+          - X-authentik-meta-outpost
+          - X-authentik-meta-provider
+          - X-authentik-meta-app
+          - X-authentik-meta-version
+    crowdsec:
+      plugin:
+        bouncer:
+          enabled: true
+          logLevel: INFO
+          crowdsecLapiKey: Xc3YDCB7BSkUsYIgw4WK8zgNs6/lesSoJWHvbsHsYlk
+          crowdsecLapiHost: 192.168.50.37:18149 #:8080
+    pihole-redirect:
+      redirectRegex:
+        regex: "^https?://pihole.cd1git.com/$"
+        replacement: "https://pihole.cd1git.com/admin/"
+    sftpgoadmin-redirect:
+      redirectRegex:
+        regex: "^https?://sftpgoadmin.cd1git.com/$"
+        replacement: "https://sftpgoadmin.cd1git.com/web/admin/login"
+    pycharm-redirect:
+      redirectRegex:
+        regex: "^https?://pycharm.cd1git.com/$"
+        replacement: "https://pycharm.cd1git.com/vnc.html"
+    # Only Allow Local networks
+    local-ipwhitelist:
+      ipWhiteList:
+        sourceRange:
+          - 127.0.0.1/32 # localhost
+          - 192.168.50.0/24 # LAN Subnet
+    plugin-log4shell:
+        plugin:
+            plugin-log4shell:
+                errorCode: "200"
+
+ #   my-middleflare:
+#        plugin:
+ #           middleflare:
+  #              Headers:
+            #        CF-Connecting-IP: 1.2.3.4
+  #                  CF-Visitor: '{"scheme":"https"}'
+   #                 X-Forwarded-Proto: https
+   #                 X-Fowarded-For: 1.2.3.4 4.3.2.1 8.8.8.8 7.7.7.7
+  #  my-cloudflarewarp:
+  #      plugin:
+  #          cloudflarewarp:
+  #              disableDefault: "false"
+  #              trustip:
+  #                  - 2400:cb00::/32
+    # Authelia guard
+    auth:
+      forwardauth:
+        address: http://authelia:9091/api/verify?rd=https://auth.cd1git.com/ # replace auth with your authelia container name
+        trustForwardHeader: true
+        authResponseHeaders:
+          - Remote-User
+          - Remote-Groups
+          - Remote-Name
+          - Remote-Email
+
+    # Authelia basic auth guard
+    auth-basic:
+      forwardauth:
+        address: http://authelia:9091/api/verify?auth=basic # replace auth with your authelia container name
+        trustForwardHeader: true
+        authResponseHeaders:
+          - Remote-User
+          - Remote-Groups
+          - Remote-Name
+          - Remote-Email
+
+    # Security headers
+    securityHeaders:
+      headers:
+       # stsSeconds: 31536000 seed-box
+        customResponseHeaders:
+          X-Robots-Tag: "none,noarchive,nosnippet,notranslate,noimageindex,noindex,nofollow"
+          X-Forwarded-Proto: "https"
+          server: ""
+        customRequestHeaders:
+          X-Forwarded-Proto: "https"
+        sslProxyHeaders:
+          X-Forwarded-Proto: "https"
+        referrerPolicy: "same-origin"
+        hostsProxyHeaders:
+          - "Cf-Connecting-Ip" #"#X-Forwarded-Host" # Cf-Connecting-Ip
+        contentTypeNosniff: true
+        browserXssFilter: true
+        forceSTSHeader: true
+        stsIncludeSubdomains: true
+        stsSeconds: 63072000
+        stsPreload: true
+        frameDeny: true # eed-box
+        PermissionsPolicy: "vibrate 'self'; geolocation 'self'; midi 'self'; notifications 'self'; push 'self'; microphone 'none'; camera 'none'; magnetometer 'none'; gyroscope 'none'; speaker 'none'; vibrate 'self'; fullscreen 'self'" # eed-box
+    # Middlewares which are used automatically by the run-seedbox.sh script according to the parameters applied
+   # common-auth:
+   #   basicAuth:
+     #   usersFile: "/etc/traefik/http_auth"
+
+    traefik-real-ip:
+        plugin:
+            traefik-real-ip:
+                excludednets:
+                    - 1.1.1.1/24
+    corsAll:
+      headers:
+        customRequestHeaders:
+          X-Forwarded-Proto: "https"
+        customResponseHeaders:
+          X-Forwarded-Proto: "https"
+        accessControlAllowMethods:
+          - OPTION
+          - POST
+          - GET
+          - PUT
+          - DELETE
+        accessControlAllowHeaders:
+          - "*"
+        accessControlAllowOriginList:
+          - "*"
+        accessControlMaxAge: 100
+        addVaryHeader: true
+    gzip:
+      compress: {}
+    crowdsec-bouncer-traefik:
+      plugin:
+        crowdsec-bouncer-traefik-plugin:
+          CrowdsecLapiKey: 2e67939cd98c5f05d9f0b8e13f67da96 #46b0c0c904d51c523ebae7224fd14c02 cd1git crowdsec
+          enabled: true
+          logLevel: info
+          updateIntervalSeconds: 60
+          defaultDecisionSeconds: 60
+          crowdsecMode: live
+          crowdsecLapiHost: 192.168.50.37:8080 #crowdsec:18149
+          crowdsecLapiScheme: http
+          crowdsecCapiScenarios:
+            - crowdsecurity/http-path-traversal-probing
+            - crowdsecurity/http-xss-probing
+            - crowdsecurity/http-generic-bf
+          forwardedHeadersTrustedIPs:
+            - 172.23.0.0/16
+            - 172.23.0.1
+          clientTrustedIPs:
+            - 192.168.50.0/24
+            - 172.23.0.0/16
+           # - 172.19.0.0/16
+    fail2ban:
+      plugin:
+        fail2ban:
+          loglevel: INFO
+          whitelist:
+            ip:
+              - "127.0.0.2"
+              - "192.168.50.0/24"
+              - "172.23.0.0/16"
+       #   blacklist:
+         #   ip:
+         #     - "127.0.0.3"
+
+          rules:
+            urlregexps:
+            #  - regexp: "/no"
+              #  mode: block
+             # -# regexp: "/yes"
+              #  mode: allow
+            bantime: "3h"
+            enabled: true
+            findtime: "3h"
+            maxretry: 4
+#crowdsec-bouncer-raspberrypi:
+# plugin:
+#   crowdsec-bouncer-traefik-plugin:
+#     CrowdsecLapiKey: 2e67939cd98c5f05d9f0b8e13f67da96 #46b0c0c904d51c523ebae7224fd14c02 cd1git crowdsec
+#     enabled: true
+#     logLevel: info
+#     updateIntervalSeconds: 60
+#     defaultDecisionSeconds: 60
+#     crowdsecMode: live
+#     crowdsecLapiHost: 192.168.50.20:8080 #crowdsec:18149
+#     crowdsecLapiScheme: http
+#     crowdsecCapiScenarios:
+#       - crowdsecurity/http-path-traversal-probing
+#       - crowdsecurity/http-xss-probing
+#       - crowdsecurity/http-generic-bf
+#     forwardedHeadersTrustedIPs:
+#       - 172.23.0.0/16
+#       - 172.23.0.1
+#     clientTrustedIPs:
+#       - 192.168.50.0/24
+#       - 172.23.0.0/16
+#      # - 172.19.0.0/16
+#     forwardedHeadersCustomName: X-Custom-Header
+#     redisCacheEnabled: true
+#     redisCacheHost: "redis:6379"
+#     redisCachePassword: "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iL"
+
+    crowdsec-bouncer-raspberrypi:
+        plugin:
+            crowdsec-bouncer-traefik-plugin:
+                CrowdsecLapiKey: 2e67939cd98c5f05d9f0b8e13f67da96 #46b0c0c904d51c523ebae7224fd14c02 cd1git crowdsec
+                enabled: true
+                logLevel: info
+                updateIntervalSeconds: 60
+                defaultDecisionSeconds: 60
+                crowdsecMode: live
+                crowdsecLapiHost: 192.168.50.20:8080 #crowdsec:18149
+                crowdsecLapiScheme: http
+                crowdsecCapiScenarios:
+                - crowdsecurity/http-path-traversal-probing
+                - crowdsecurity/http-xss-probing
+                - crowdsecurity/http-generic-bf
+                forwardedHeadersTrustedIPs:
+                - 172.23.0.0/16
+                - 172.23.0.1
+                clientTrustedIPs:
+                - 192.168.50.0/24
+                - 172.23.0.0/16
+                # - 172.19.0.0/16
+                forwardedHeadersCustomName: X-Custom-Header
+                redisCacheEnabled: true
+                redisCacheHost: "redis:6379"
+                redisCachePassword: "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iL"
+    google-oauth:
+      forwardAuth:
+        address: "http://traefik-forward-auth:4181" # Make sure you have the OAuth service in docker-compose.yml
+        trustForwardHeader: true
+        authResponseHeaders:
+          - "X-Forwarded-User"
+    http-cache:
+      plugin:
+        souin:
+          api:
+            prometheus: /prometheus-metrics
+            souin: /souin-api
+          cdn: # If Souin is set after a CDN fill these informations
+              api_key: # "57181bf814c517200c2153d681cc3cf6e2934" # Your provider API key if mandatory
+              provider: cloudflare # The provider placed before Souin (e.g. fastly, cloudflare, akamai, varnish)
+              strategy: soft # The strategy to purge the CDN cache based on tags (e.g. soft, hard)
+              dynamic: true # If true, you'll be able to add custom keys than the ones defined under the surrogate_keys key
+              email: "baileycw15@gmail.com"
+              zone_id: "542c003b8561202c96c5437c93e38f1f"
+          default_cache:
+            regex:
+              exclude: '/test_exclude.*'
+            ttl: 5s
+            allowed_http_verbs:
+              - GET
+              - HEAD
+              - POST
+            default_cache_control: no-store
+          log_level: debug
+          urls:
+            'cd1git.com/testing':
+              ttl: 5s
+            'traefik.cd1git.com':
+              ttl: 50s
+              default_cache_control: public, max-age=86400
+          ykeys:
+            The_First_Test:
+              headers:
+                Content-Type: '.+'
+            The_Second_Test:
+              url: 'the/second/.+'
+            The_Third_Test:
+            The_Fourth_Test:
+          surrogate_keys:
+            The_First_Test:
+              headers:
+                Content-Type: '.+'
+            The_Second_Test:
+              url: 'the/second/.+'
+            The_Third_Test:
+            The_Fourth_Test:
+# http-cache:
+# plugin:
+#   souin:
+#     api:
+#       basepath: "/souin-api"
+#       prometheus:
+#          basepath: "/prometheus-metrics"
+#       souin:
+#          basepath: "/souin-metrics"
+#     cdn: # If Souin is set after a CDN fill these informations
+#       api_key: "57181bf814c517200c2153d681cc3cf6e2934" # Your provider API key if mandatory
+#       provider: cloudflare # The provider placed before Souin (e.g. fastly, cloudflare, akamai, varnish)
+#       strategy: soft # The strategy to purge the CDN cache based on tags (e.g. soft, hard)
+#       dynamic: true # If true, you'll be able to add custom keys than the ones defined under the surrogate_keys key
+#       email: "baileycw15@gmail.com"
+#       zone_id: "542c003b8561202c96c5437c93e38f1f"
+#     default_cache:
+#       regex:
+#         exclude: # '/test_exclude.*'
+#       ttl: 5s
+#       allowed_http_verbs:
+#         - GET
+#         - HEAD
+#         - POST
+#       timeout: # Timeout configuration
+#           backend: 10s # Backend timeout before returning an HTTP unavailable response
+#           cache: 20ms # Cache provider (badger, etcd, nutsdb, olric, depending the configuration you set) timeout before returning a miss
+#       default_cache_control: no-store
+#     log_level: info
+          #urls:
+            #'cd1git.com/testing':
+             # ttl: 5s
+            #'traefik.cd1git.com':
+              #ttl: 50s
+             # default_cache_control: public, max-age=86400
+           # 'https:\/\/cd1git.com\/first-.+': # First regex route configuration
+            #  ttl: 1000s # Override default TTL
+           # 'https:\/\/cd1git.com\/second-route': # Second regex route configuration
+            #  ttl: 10s # Override default TTL
+            #'https?:\/\/proxy\.cd1git\.com': # Third regex route configuration
+            #  ttl: 50s # Override default TTL'
+# default_cache_control: public, max-age=86400 # Override default default Cache-Control
+# ykeys:
+#   The_First_Test:
+#     headers:
+#       Content-Type: '.+'
+#   The_Second_Test:
+#     url: 'the/second/.+'
+#   The_Third_Test:
+#   The_Fourth_Test:
+# surrogate_keys:
+#   The_First_Test:
+#     headers:
+#       Content-Type: '.+'
+#   The_Second_Test:
+#     url: 'the/second/.+'
+#   The_Third_Test:
+#   The_Fourth_Test:
+#tower-sablier:
+# plugin:
+#     sablier:
+#         dynamic:
+#             displayName: Traefik-Tower
+#             refreshFrequency: 5s
+#             showDetails: "true"
+#             theme: hacker-terminal
+#         group: default
+#         names: Grafana,Docker-WebUI,pterodactyl-daemon,mosquitto,JDownloader2,adminer,postgres,mariadb,elasticsearch
+#         sablierUrl: http://192.168.50.223:10000
+#         sessionDuration: 5m
+    # my-sablier:
+    #     plugin:
+    #         sablier:
+    #             dynamic:
+    #                 displayName: Traefik
+    #                 refreshFrequency: 5s
+    #                 showDetails: "true"
+    #                 theme: hacker-terminal
+    #             group: default
+    #             names: prowlarr,steam-headless,pycharm
+    #             sablierUrl: http://sablier:10000
+    #             sessionDuration: 1m
+#my-geoblock:
+# plugin:
+#     geoblock:
+#         backListMode: false
+#             allowLocalRequests: "true"
+#             allowUnknownCountries: "false"
+#             api: https://get.geojs.io/v1/ip/country/{ip}
+#             apiTimeoutMs: "150"
+#             cacheSize: "15"
+#             countries:
+#                 - US
+#                 - CA
+#             forceMonthlyUpdate: "true"
+#             logAllowedRequests: "true"
+#             logApiRequests: "false"
+#             logLocalRequests: "false"
+#             unknownCountryApiResponse: nil
+#             allowedIPAddresses:
+#                 # - 192.168.50.0/24
+# traefikgeoip2:
+# plugin:
+#   traefikgeoip2:
+#     dbPath: /geoip/GeoLite2-City.mmdb #/GeoLite2-Country.mmdb #/geoip/GeoLite2-Country.mmdb
+# traefik-plugin-geoblock:
+# plugin:
+#   traefik-plugin-geoblock:
+#     enabled: "true"
+#  databaseFilePath: /plugins-local/src/github.com/nscuro/traefik-plugin-geoblock/IP2LOCATION-LITE-DB1.IPV6.BIN
+#      Whitelist of countries to allow (ISO 3166-1 alpha-2)
+#    allowedCountries: [ "US", "CA" ]
+#     # Allow requests from private / internal networks?
+#   allowPrivate: true
+#       HTTP status code to return for disallowed requests (default: 403)
+#   disallowedStatusCode: 204
+#      Add CIDR to be whitelisted, even if in a non-allowed country
+#   allowedIPBlocks: ["192.168.50.0/24"]
+    crowdsec-bouncer:
+       forwardauth:
+        address: http://crowdsec-traefik-bouncer:18150/api/v1/forwardAuth
+        trustForwardHeader: true
+    cloudflarewarp:
+      plugin:
+        cloudflarewarp:
+          disableDefault: false
+          trustip:
+            # - 192.168.50.0/24 # Trust IPS not required if disableDefault is false - we will allocate Cloud Flare IPs automatically
+    tower-sablier:
+        plugin:
+            sablier:
+                dynamic:
+                    displayName: Tower
+                    refreshFrequency: 5s
+                    showDetails: "true"
+                    theme: hacker-terminal
+                group: default
+                names: Grafana,Docker-WebUI,pterodactyl-daemon,mosquitto,JDownloader2,adminer,postgres,mariadb,elasticsearch,prometheus
+                sablierUrl: http://192.168.50.223:10000
+                sessionDuration: 15m
+                level: info
+    traefik-sablier:
+        plugin:
+            sablier:
+                dynamic:
+                    displayName: CDUB
+                    refreshFrequency: 5s
+                    showDetails: "true"
+                    theme: hacker-terminal
+                group: default
+                names: Stash-waneda,Dozzle,dockerwebui
+                #pterodactyl-panel,Microsoft-Edge,mullvad-browser,headless-shell,dockerwebui, steam-headless,pterodactyl-daemon,prometheus,
+                sablierUrl: http://sablier:10000
+                sessionDuration: 15m
+                logging:
+                level: debug
+# Only use secure ciphers - https://ssl-config.mozilla.org/#server=traefik&version=2.6.0&config=intermediate&guideline=5.6
+tls:
+  options:
+    default:
+      minVersion: VersionTLS12
+      cipherSuites:
+        - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+        - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+        - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+        - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+        - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
+        - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305

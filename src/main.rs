@@ -105,19 +105,32 @@ async fn generate_traefik_config(conn: &DbConn) -> String {
     let mut config = tls::TlsRoute::generate_traefik_config(conn).await;
     let http = http::HttpRoute::generate_traefik_config(conn).await;
 
+    // Import existing config if it exists
+    if let Ok(existing_config) = std::fs::read_to_string("/app/config/fileConfig.yml") {
+        if let Ok(mut existing) = serde_yaml::from_str::<traefik::TraefikConfig>(&existing_config) {
+            // Merge existing config with generated config
+            config.http.routers.extend(existing.http.routers);
+            config.http.services.extend(existing.http.services);
+            config.http.middlewares = existing.http.middlewares;
+            if let Some(tls) = existing.tls {
+                config.tls = Some(tls);
+            }
+        }
+    }
+
     config.http.routers.extend(http.routers);
     config.http.services.extend(http.services);
     config.http.add_default_middlewares();
 
-    let serialized = serde_yaml::to_string(&config).unwrap();
-
-    serialized
+    serde_yaml::to_string(&config).unwrap()
 }
 
 pub async fn export_traefik_config(conn: &DbConn) {
     let config = generate_traefik_config(conn).await;
+    let config_path = std::env::var("TRAEFIK_CONFIG_FILE")
+        .unwrap_or_else(|_| "/app/config/gui.yml".to_string());
 
-    std::fs::write("./traefik/gui.yml", config).unwrap();
+    std::fs::write(config_path, config).unwrap();
 }
 
 async fn initialize_traefik_config(rocket: Rocket<Build>) -> Rocket<Build> {

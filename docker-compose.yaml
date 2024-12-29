@@ -12,12 +12,13 @@ services:
       - 8000:8000
     environment:
       RUST_BACKTRACE: 1
+      TRAEFIK_CONFIG_FILE: /app/config/gui.yml
     volumes:
       - gui-data:/app/db
-      - config:/app/traefik
-      # - ./traefik:/app/traefik
+      - config:/app/config
+      - ./fileConfig.yml:/app/config/fileConfig.yml:ro
+      # - ./config:/app/config # for local development
 
-  
   traefik:
     image: traefik:latest
     restart: unless-stopped
@@ -44,4 +45,4 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # Additional configurations created by the ui
       - config:/config:ro
-      # - ./traefik:/config:ro
+      # - ./config:/config:ro # for local development
